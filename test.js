@@ -47,11 +47,11 @@ it('should support supplying a custom namespace', function (cb) {
 
 	var stream = tpl(
 	{
-		namespace: 'customNS',
+		namespace: 'window.custom.namespace',
 	});
 
 	stream.on('data', function (file) {
-		assert(/window\["customNS"\]/.test(file.contents.toString()));
+		assert(/"window.custom.namespace"/.test(file.contents.toString()));
 		cb();
 	});
 

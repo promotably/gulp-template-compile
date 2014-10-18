@@ -11,10 +11,15 @@ module.exports = function (options) {
 
 	function compiler (file) {
 		var name = typeof options.name === 'function' && options.name(file) || file.relative;
-		var namespace = options.namespace || 'JST';
-		var NSwrapper = '(function() {(window["'+ namespace +'"] = window["'+ namespace +'"] || {})["'+ name.replace(/\\/g, '/') +'"] = ';
+		var namespace = options.namespace || 'window.JST';
+		var NSwrapper = '(function() {';
 
 		var template = tpl(file.contents.toString(), false, options.templateSettings).source;
+
+		if(namespace === 'window.JST') {
+			NSwrapper += 'if(!window.JST) window.JST = {};';
+		}
+		NSwrapper += namespace + '["'+ name.replace(/\\/g, '/') +'"] = ';
 
 		return NSwrapper + template + '})();';
 	}

@@ -1,6 +1,8 @@
 # [gulp](https://github.com/wearefractal/gulp)-template-compile
 
-> Compile [Lo-Dash templates](http://lodash.com/docs#template) (should work with [Underscore templates](http://underscorejs.org/#template) too).
+Compile [Lo-Dash templates](http://lodash.com/docs#template) (should work with [Underscore templates](http://underscorejs.org/#template) too).
+
+Forked from [https://github.com/ingro/gulp-template-compile]. Same in every way except for the namespace option which now allows dot-notated Strings.
 
 ## Synopsis
 
@@ -61,9 +63,14 @@ Example:
 
 #### options.namespace
 Type: `String`
-Default: 'JST'
+Default: 'window.JST'
 
-The namespace in which the precompiled templates will be assigned.
+The namespace in which the precompiled templates will be assigned e.g. `window.myNamespace.templates`.
+
+If not provided, the `window.JST` namespace will be created if it does not already exist.
+
+If provided, the namespace must already exist otherwise an error will result.
+
 
 #### options.templateSettings
 Type: `Object`
